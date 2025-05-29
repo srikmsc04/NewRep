@@ -1,0 +1,20 @@
+select * from users where providerid in (
+		 select distinct ps.providerid from Provider_Superbill  ps join provider p on p.ProviderID =ps.ProviderId 
+        cross apply (select cast(ProviderSuperbill as xml)) as X(X)
+cross apply X.X.nodes('//SuperBill/section') T(N)
+        where ps.providerid in (select distinct  providerid from users where Active_YN=1 and isnull(providerid,0)>0)
+        and  (T.N.value('@category', 'varchar(50)')='FACULTY PRACTICES' ))order by username
+
+
+	AABBASI,AALKHAZRAJI,APATEL9,CAWWAD,CKODERY,CMYERJACK,GVARBARO,KHANLEY,LPORTER,LPRADHANANG,MBELVIS,MHANNA,MKAUR
+,MMIGLIETTA,OAWONIYI,PMALHOTRA,PNEOPANE,RASIEDU2,SFOCELLA,SGALUSTIAN,SMOONTHUNGAL,SNAVABI,SSORATHIA
+
+select * from Provider_Superbill where SuperBillId=3290 3302
+select * from Provider_SuperbillExamType  where  SuperBillId=3290  templateid=1137 SuperBillId=3302
+
+select convert(xml,ProviderSuperbill),* from Provider_Superbill ps join Provider_SuperbillExamType pse on pse.SuperBillId=ps.SuperBillId 
+where templateid=1137
+
+select * from users where username ='MBELVIS'
+
+select providername,* from provider where providerid=1621
